@@ -10,3 +10,5 @@ In order to make the keylogger work, the following is needed to be done:
    - In classGetEncryption: Change `strEncryptedFile = "ADDYOURURLHERE` to the public URL of that encrypted Json file (Must auto download!)
 4. Change settings in KeyloggerController upon runtime.
 
+## Packages used:
+Newtonsoft.Json
