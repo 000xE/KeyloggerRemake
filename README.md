@@ -17,3 +17,6 @@ In order to make the keylogger work, the following is needed to be done:
 
 ## Packages used:
 - Newtonsoft.Json
+
+## Disclaimer:
+I don't support the use of this keylogger in a malicious intent, and therefore I hold no responsibility as to what damage it may inflict upon others.
