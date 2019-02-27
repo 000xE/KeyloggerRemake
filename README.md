@@ -11,4 +11,4 @@ In order to make the keylogger work, the following is needed to be done:
 4. Change settings in KeyloggerController upon runtime.
 
 ## Packages used:
-Newtonsoft.Json
+- Newtonsoft.Json
