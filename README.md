@@ -3,7 +3,7 @@ A complete object-oriented remake of a keylogger I've built in 2016, this time i
 
 In order to make the keylogger work, the following is needed to be done:
 1. Get [KeyloggerController](https://github.com/outerme/KeyloggerController)
-2. Edit its local json file as well as where to encrypt it to
+2. Edit its local json file directory as well as where to encrypt it to
    - In classJsonObj: Change `strJsonDir = @"ADDYOURDIRECTORYHERE"` to a directory with the local [Json file](https://github.com/outerme/KeyloggerController/blob/master/Controller.json).
    - In classJsonObj: Change `strEncryptDir = @"ADDYOURDIRECTORYHERE"` to a directory to save that Json file, encrypted.
 3. Upload the encrypted json file onto a file hosting service like [Dropbox](https://www.dropbox.com/), and get its public link ([Must auto download!](https://www.dropbox.com/help/desktop-web/force-download)).
