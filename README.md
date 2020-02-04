@@ -1,6 +1,6 @@
 # KeyloggerRemake
 
-https://travis-ci.com/outerme/KeyloggerRemake.svg?branch=master
+[![Build Status](https://travis-ci.com/outerme/KeyloggerRemake.svg?branch=master)](https://travis-ci.com/outerme/KeyloggerRemake)
 
 A complete object-oriented remake of a keylogger I've built in 2016, this time in C#.
 
