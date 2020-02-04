@@ -1,4 +1,7 @@
 # KeyloggerRemake
+
+https://travis-ci.com/outerme/KeyloggerRemake.svg?branch=master
+
 A complete object-oriented remake of a keylogger I've built in 2016, this time in C#.
 
 In order to make the keylogger work, the following is needed to be done:
